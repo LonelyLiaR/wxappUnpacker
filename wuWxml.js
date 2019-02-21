@@ -307,6 +307,7 @@ function doWxml(state,dir,name,code,z,xPool,rDs,wxsList,moreInfo){
 	let rname=code.slice(code.lastIndexOf("return")+6).replace(/[\;\}]/g,"").trim();
 	code=code.slice(code.indexOf("\n"),code.lastIndexOf("return")).trim();
 	let r={son:[]};
+	console.log(code)
 	analyze(esprima.parseScript(code).body,z,{[rname]:r},xPool,{[rname]:r});
 	let ans=[];
 	for(let elem of r.son)ans.push(elemToString(elem,0,moreInfo));
@@ -329,6 +330,7 @@ function doWxml(state,dir,name,code,z,xPool,rDs,wxsList,moreInfo){
 	}
 	name=path.resolve(dir,name);
 	if(wxsList[name])result.push(wxsList[name]);
+	console.log(name)
 	wu.save(name,result.join(""));
 }
 function tryWxml(dir,name,code,z,xPool,rDs,...args){
